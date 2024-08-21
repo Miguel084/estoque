@@ -23,6 +23,7 @@
                         <th class="px-4 py-2">Descrição</th>
                         <th class="px-4 py-2">Preço</th>
                         <th class="px-4 py-2">Quantidade no estoque</th>
+                        <th class="px-4 py-2">Categoria</th>
                         <th class="px-4 py-2">Ações</th>
                     </tr>
                     </thead>
@@ -38,6 +39,8 @@
                             <td class="border px-4 py-2">{{ $produto->preco }}</td>
 
                             <td class="border px-4 py-2">{{ $produto->quantidade }}</td>
+
+                            <td class="border px-4 py-2">{{ $produto->categoria->nome }}</td>
 
                             <td class="border px-4 py-4 d-flex justify-center">
                                 <a href="{{ route('produtos.edit', $produto->id) }}" class="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded">Editar</a>

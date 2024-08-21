@@ -42,6 +42,21 @@
                     </div>
 
                     <div class="px-4 py-5 sm:p-6">
+                        <label for="categoria" class="block font-medium text-sm text-gray-700">Categoria</label>
+                        <select name="categoria_id" id="categoria" class="form-select rounded-md shadow-sm mt-1 block w-full">
+                            <option disabled selected>Selecione uma categoria</option>
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                                @endforeach
+                        </select>
+                        @error('categoria')
+                            <div class="text-red-500 mt-2 text-sm">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="px-4 py-5 sm:p-6">
                         <label for="quantidade" class="block font-medium text-sm text-gray-700">Quantidade no estoque</label>
                         <input type="number" name="quantidade" id="quantidade" class="form-input rounded-md shadow-sm mt-1 block w-full" />
                         @error('quantidade')

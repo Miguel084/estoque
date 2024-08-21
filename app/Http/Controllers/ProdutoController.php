@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProdutosRequest;
+use App\Http\Requests\ProdutoRequest;
+use App\Models\Categoria;
+use App\Models\Produto;
 use App\Models\Produtos;
 use Illuminate\Http\Request;
 
@@ -10,18 +12,19 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produtos::paginate(10);
+        $produtos = Produto::paginate(10);
         return view('produtos.index', compact('produtos'));
     }
 
     public function create()
     {
-        return view('produtos.create');
+        $categorias = Categoria::all();
+        return view('produtos..create', compact('categorias'));
     }
 
-    public function store(ProdutosRequest $request)
+    public function store(ProdutoRequest $request)
     {
-        Produtos::create($request->all());
+        Produto::create($request->all());
         return redirect()->route('produtos.index');
     }
 
@@ -31,20 +34,20 @@ class ProdutoController extends Controller
 
     public function edit($id)
     {
-        $produto = Produtos::find($id);
+        $produto = Produto::find($id);
         return view('produtos.edit', compact('produto'));
     }
 
-    public function update(ProdutosRequest $request, $id)
+    public function update(ProdutoRequest $request, $id)
     {
-        $produto = Produtos::find($id);
+        $produto = Produto::find($id);
         $produto->update($request->all());
         return redirect()->route('produtos.index');
     }
 
     public function destroy($id)
     {
-        $produto = Produtos::find($id);
+        $produto = Produto::find($id);
         $produto->delete();
         return redirect()->route('produtos.index');
 
