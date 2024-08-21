@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\ProdutoController;
 use Illuminate\Support\Facades\Route;
@@ -16,15 +17,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
             'index' => 'dashboard'
         ]);
 
-    Route::resource('produtos', ProdutoController::class)
-        ->names([
-            'index' => 'produtos.index',
-            'create' => 'produtos.create',
-            'store' => 'produtos.store',
-            'show' => 'produtos.show',
-            'edit' => 'produtos.edit',
-            'update' => 'produtos.update',
-            'destroy' => 'produtos.destroy',
-        ]);
+    Route::resource('produtos', ProdutoController::class);
+
+    Route::resource('categorias', CategoriaController::class);
 
 });

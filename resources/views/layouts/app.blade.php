@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <title>{{ config('app.name', 'Estoque') }}</title>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -41,5 +41,19 @@
         @stack('modals')
 
         @livewireScripts
+
+        @yield('scripts')
+
+        @if (session('success'))
+            <script>
+                Swal.fire('Sucesso', '{{ session('success') }}', 'success');
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire('Erro', '{{ session('error') }}', 'error');
+            </script>
+        @endif
     </body>
 </html>
