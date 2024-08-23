@@ -11,7 +11,7 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a>quantidade de vendas </a>
+                <a> {{ __('Total de Vendas: ') . __('R$') . $valores['total']  }}</a>
             </h2>
         </div>
     </div>
@@ -19,7 +19,20 @@
     <div>
         <div class="flex items-center">
             <h2 class="ms-3 text-xl font-semibold text-gray-900">
-                <a>Estoque total</a>
+                <a> {{ __('Quantidade total de produtos no estoque: ')  . $valores['totalEstoque'] }}</a>
+            </h2>
+        </div>
+    </div>
+
+    <div>
+        <div class="flex items-center">
+            <h2 class="ms-3 text-xl font-semibold text-gray-900">
+                <a> {{ __('Produtos vendidos por categoria') }}</a>
+                @foreach($valores['vendasPorCategoria'] as $categoria)
+                    <br>
+                    <a> {{ $categoria['nome'] . ': ' . $categoria['quantidade'] . ' ' }}</a>
+
+                @endforeach
             </h2>
         </div>
     </div>

@@ -10,16 +10,16 @@ class PedidoDeVenda extends Model
     protected $fillable = [
         'data_do_pedido',
         'status',
-        'cliente_id',
-        'cliente_id',
+        'produto_id',
     ];
 
-    public function cliente(): BelongsTo
+    public function produto(): BelongsTo
     {
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Produto::class);
     }
 
-    protected function casts()
+
+    protected function casts(): array
     {
         return [
             'data_do_pedido' => 'date',

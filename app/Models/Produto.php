@@ -20,4 +20,9 @@ class Produto extends Model
     {
         return $this->belongsTo(Categoria::class);
     }
+
+    public function pedidoDeVenda()
+    {
+        return $this->hasMany(PedidoDeVenda::class);
+    }
 }

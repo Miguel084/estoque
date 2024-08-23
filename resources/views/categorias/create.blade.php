@@ -22,11 +22,11 @@
                     </div>
 
                     <div class="flex items-center justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button class="inline-flex items-center px-4 py-2 bg-blue-500 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-4 py-2 bg-blue-500 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:border-blue-900 focus:shadow-outline-blue disabled:opacity-25 transition ease-in-out duration-150">
                             Criar
                         </button>
 
-                        <a href="{{ route('categorias.index') }}" class="inline-flex items-center px-4 py-2 bg-red-500 rounded-md font-semibold text-xs text-black uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
+                        <a href="{{ route('categorias.index') }}" class="inline-flex items-center px-4 py-2 bg-red-500 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 active:bg-red-900 focus:outline-none focus:border-red-900 focus:shadow-outline-red disabled:opacity-25 transition ease-in-out duration-150">
                             Cancelar
                         </a>
                     </div>

@@ -33,14 +33,16 @@ class ProdutoController extends Controller
     public function edit($id)
     {
         $produto = Produto::find($id);
-        return view('produtos.edit', compact('produto'));
+        $categorias = Categoria::all();
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     public function update(ProdutoRequest $request, $id)
     {
         $produto = Produto::find($id);
         $produto->update($request->all());
-        return redirect()->route('produtos.index');
+
+        return redirect()->route('produtos.index')->with('success', 'O produto foi atualizado com sucesso.');
     }
 
     public function destroy($id)
@@ -52,7 +54,6 @@ class ProdutoController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('produtos.index')->with('error', 'Não foi possível excluir o produto.');
         }
-        return redirect()->route('produtos.index');
 
     }
 }
