@@ -12,24 +12,51 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $hoje = Carbon::today();
-        $pedidoDeVendaProduto = PedidoDeVenda::with('produto')->get();
-        $pedidoDeVendaCategoria = PedidoDeVenda::with('produto.categoria')->get();
+        $hoje = Carbon::today()->format('Y-m-d');
+        $mes = Carbon::now()->startOfMonth()->format('Y-m-d');
+        $ano = Carbon::now()->startOfYear()->format('Y-m-d');
 
+        $pedidoDeVendaProduto = PedidoDeVenda::with('produto');
+        $pedidoDeVendaCategoria = PedidoDeVenda::with('produto.categoria');
 
+        $valoresHoje = $this->calcularValores(clone $pedidoDeVendaProduto, clone $pedidoDeVendaCategoria, $hoje, $hoje);
+        $valoresMes = $this->calcularValores(clone $pedidoDeVendaProduto, clone $pedidoDeVendaCategoria, $mes, $hoje);
+        $valoresAno = $this->calcularValores(clone $pedidoDeVendaProduto, clone $pedidoDeVendaCategoria, $ano, $hoje);
 
-        $valores = [
-            'totalPedidos' => $pedidoDeVendaProduto->count(),
-            'total' => $pedidoDeVendaProduto->sum('produto.preco'),
-            'totalEstoque' => $pedidoDeVendaProduto->unique('produto_id')->sum('produto.quantidade'),
-            'vendasPorCategoria' => $pedidoDeVendaCategoria->groupBy('produto.categoria.nome')->map(function ($item) {
-                return [
-                    'nome' => $item->first()->produto->categoria->nome,
-                    'quantidade' => $item->count('produto_id'),
-                    'data' => Carbon::now()->toDateString(),
-                ];
-            }),
+        return view('dashboard', compact('valoresHoje', 'valoresMes', 'valoresAno'));
+    }
+
+    private function calcularValores($pedidoDeVendaProduto, $pedidoDeVendaCategoria, $inicio, $fim)
+    {
+        $pedidos = $pedidoDeVendaProduto->whereBetween('data_do_pedido', [$inicio, $fim])->get();
+
+        $pedidosPorCategoria = $pedidoDeVendaCategoria->whereBetween('data_do_pedido', [$inicio, $fim])->get();
+
+        $totalPedidos = $pedidos->count();
+
+        $total = $pedidos->sum(function($pedido) {
+            return $pedido->produto->preco;
+        });
+
+        $totalEstoque = $pedidos->unique('produto_id')->sum(function($pedido) {
+            return $pedido->produto->quantidade;
+        });
+
+        $vendasPorCategoria = $pedidosPorCategoria->groupBy(function($pedido) {
+            return $pedido->produto->categoria->nome;
+        })->map(function($item) {
+            return [
+                'nome' => $item->first()->produto->categoria->nome,
+                'quantidade' => $item->count('produto_id'),
+                'data' => Carbon::now()->toDateString(),
+            ];
+        });
+
+        return [
+            'totalPedidos' => $totalPedidos,
+            'total' => $total,
+            'totalEstoque' => $totalEstoque,
+            'vendasPorCategoria' => $vendasPorCategoria,
         ];
-        return view('dashboard', compact('valores'));
     }
 }

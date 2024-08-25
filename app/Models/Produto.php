@@ -16,6 +16,8 @@ class Produto extends Model
         'imagem',
     ];
 
+    protected $table = 'produtos';
+
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class);

@@ -7,7 +7,7 @@
 
     <div class="py-12   ">
         <div class="max-w-7xl mx-auto flex lg:px-8 b " style="justify-content: end">
-            <div class="bg-white w-1/2 flex justify-center  shadow-xl rounded-full ">
+            <div class="bg-white w-1/2 flex justify-center  shadow-xl rounded-[10px]">
                 <a href="{{ route('pedido-de-venda.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold text-lg flex items-center justify-center p-2 w-full rounded-[10px]">Cadastrar Nova Venda</a>
             </div>
         </div>
