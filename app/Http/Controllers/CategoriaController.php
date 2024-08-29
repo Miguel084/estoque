@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoriaDestroyRequest;
 use App\Http\Requests\CategoriasRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
@@ -12,8 +11,9 @@ class CategoriaController extends Controller
 {
     public function index()
     {
+        $categorias = Categoria::where('loja_id', auth()->user()->loja_id)->paginate(10);
         return view('categorias.index', [
-            'categorias' => Categoria::paginate(10)
+            'categorias' => $categorias
         ]);
     }
 

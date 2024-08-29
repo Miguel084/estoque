@@ -8,6 +8,9 @@ class ProdutoRequest extends FormRequest
 {
     public function rules()
     {
+        $this->merge([
+            'loja_id' => auth()->user()->loja_id,
+        ]);
         return [
             'nome' => ['required'],
             'descricao' => ['required'],

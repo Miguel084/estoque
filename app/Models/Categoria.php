@@ -8,11 +8,17 @@ class Categoria extends Model
 {
     protected $fillable = [
         'nome',
+        'loja_id',
     ];
 
     public function produtos()
     {
         return $this->hasMany(Produto::class);
+    }
+
+    public function loja()
+    {
+        return $this->belongsTo(Loja::class);
     }
 
 }

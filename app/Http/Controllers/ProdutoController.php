@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProdutoRequest;
 use App\Models\Categoria;
 use App\Models\Produto;
+use Nette\Utils\ArrayList;
+use function Sodium\add;
 
 class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::paginate(10);
+        $produtos = Produto::where('loja_id', auth()->user()->loja_id)->paginate(10);
         return view('produtos.index', compact('produtos'));
     }
 
     public function create()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::all()
+            ->where('loja_id', auth()->user()->loja_id);
+
         return view('produtos..create', compact('categorias'));
     }
 

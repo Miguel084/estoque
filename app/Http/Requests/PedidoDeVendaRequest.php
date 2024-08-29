@@ -2,16 +2,24 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Produto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PedidoDeVendaRequest extends FormRequest
 {
     public function rules(): array
     {
+        $this->merge([
+            'loja_id' => auth()->user()->loja_id,
+            'valor_total' => Produto::find($this->produto_id)->preco,
+        ]);
+
         return [
             'data_do_pedido' => ['required', 'date'],
             'status' => ['required'],
             'produto_id' => ['required', 'exists:produtos,id'],
+            'loja_id' => ['required'],
+            'valor_total' => ['required'],
         ];
     }
 

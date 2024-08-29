@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'loja_id',
         'password',
     ];
 
@@ -61,5 +62,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function loja()
+    {
+        return $this->belongsTo(Loja::class);
     }
 }

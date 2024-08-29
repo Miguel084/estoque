@@ -16,8 +16,8 @@ class DashboardController extends Controller
         $mes = Carbon::now()->startOfMonth()->format('Y-m-d');
         $ano = Carbon::now()->startOfYear()->format('Y-m-d');
 
-        $pedidoDeVendaProduto = PedidoDeVenda::with('produto');
-        $pedidoDeVendaCategoria = PedidoDeVenda::with('produto.categoria');
+        $pedidoDeVendaProduto = PedidoDeVenda::with('produto')->where('loja_id', auth()->user()->loja_id);
+        $pedidoDeVendaCategoria = PedidoDeVenda::with('produto.categoria')->where('loja_id', auth()->user()->loja_id);
 
         $valoresHoje = $this->calcularValores(clone $pedidoDeVendaProduto, clone $pedidoDeVendaCategoria, $hoje, $hoje);
         $valoresMes = $this->calcularValores(clone $pedidoDeVendaProduto, clone $pedidoDeVendaCategoria, $mes, $hoje);

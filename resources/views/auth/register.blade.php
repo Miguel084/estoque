@@ -20,6 +20,16 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="loja" value="{{ __('Loja') }}" />
+                <select id="loja" class="block mt-1 w-full" name="loja_id" required>
+                    <option disabled selected>Selecione a loja</option>
+                    @foreach($lojas as $loja)
+                        <option value="{{ $loja->id }}">{{ $loja->nome }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
                 <x-label for="password" value="{{ __('Senha') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
             </div>

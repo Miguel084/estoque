@@ -13,6 +13,10 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::post(RoutePath::for('register', '/register'), [\App\Http\Controllers\Auth\RegisterController::class, 'store'])
+    ->middleware(['guest'])
+    ->name('register');
+
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::resource('dashboard', DashboardController::class)
@@ -26,5 +30,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('categorias', CategoriaController::class);
 
     Route::resource('pedido-de-venda', PedidoDeVendaController::class);
+
 
 });

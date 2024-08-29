@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\pedidoDeCompraRequest;
+use App\Http\Requests\PedidoDeCompraRequest;
 use App\Models\PedidoDeCompra;
 
-class pedidoDeCompraController extends Controller
+class PedidoDeCompraController extends Controller
 {
     public function index()
     {
         return PedidoDeCompra::all();
     }
 
-    public function store(pedidoDeCompraRequest $request)
+    public function store(PedidoDeCompraRequest $request)
     {
         return PedidoDeCompra::create($request->validated());
     }
@@ -22,7 +22,7 @@ class pedidoDeCompraController extends Controller
         return $pedidoDeCompra;
     }
 
-    public function update(pedidoDeCompraRequest $request, PedidoDeCompra $pedidoDeCompra)
+    public function update(PedidoDeCompraRequest $request, PedidoDeCompra $pedidoDeCompra)
     {
         $pedidoDeCompra->update($request->validated());
 

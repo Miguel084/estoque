@@ -10,14 +10,17 @@ class PedidoDeVendaController extends Controller
 {
     public function index()
     {
+        $pedidos = PedidoDeVenda::where('loja_id', auth()->user()->loja_id)->paginate(10);
         return view('pedido-de-venda.index', [
-            'pedidos' => PedidoDeVenda::paginate(10)
+            'pedidos' => $pedidos
         ]);
     }
 
     public function create()
     {
-        $produtos = Produto::all()->where('quantidade', '>', 0);
+        $produtos = Produto::all()
+            ->where('quantidade', '>', 0)
+            ->where('loja_id', auth()->user()->loja_id);
         return view('pedido-de-venda.create', compact('produtos'));
     }
 

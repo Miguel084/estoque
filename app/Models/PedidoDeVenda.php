@@ -11,6 +11,8 @@ class PedidoDeVenda extends Model
         'data_do_pedido',
         'status',
         'produto_id',
+        'loja_id',
+        'valor_total',
     ];
 
     public function produto(): BelongsTo

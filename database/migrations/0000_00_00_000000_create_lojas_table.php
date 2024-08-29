@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('lojas', function (Blueprint $table) {
             $table->id();
-            $table->string('Nome');
+            $table->string('nome');
             $table->string('endereço');
             $table->timestamps();
         });
