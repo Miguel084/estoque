@@ -11,10 +11,10 @@ return new class extends Migration {
             $table->id();
             $table->date('data_do_pedido');
             $table->string('status');
-            $table->unsignedBigInteger('fornecedor_id');
+            $table->foreignId('fornecedor_id')->constrained('fornecedores');
+            $table->foreignId('loja_id')->constrained();
             $table->timestamps();
 
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
         });
     }
 

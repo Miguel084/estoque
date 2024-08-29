@@ -10,6 +10,8 @@ return new class extends Migration {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('descricao')->nullable();
+            $table->foreignId('loja_id')->constrained();
             $table->timestamps();
         });
     }

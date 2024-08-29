@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('fornecedores', function (Blueprint $table) {
+        Schema::create('lojas', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('telefone');
-            $table->string('email');
-            $table->foreignId('loja_id')->constrained();
+            $table->string('Nome');
+            $table->string('endereço');
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('fornecedores');
+        Schema::dropIfExists('lojas');
     }
 };

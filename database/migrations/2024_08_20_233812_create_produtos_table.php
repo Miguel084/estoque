@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->decimal('preco');
             $table->string('quantidade');
             $table->foreignId('categoria_id')->constrained('categorias');
+            $table->foreignId('loja_id')->constrained('lojas');
             $table->string('imagem')->nullable();
             $table->timestamps();
         });

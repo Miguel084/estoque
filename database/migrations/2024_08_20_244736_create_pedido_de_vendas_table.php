@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->date('data_do_pedido');
             $table->string('status');
             $table->float('valor_total');
+            $table->foreignId('loja_id')->constrained('lojas');
             $table->foreignId('produto_id')->constrained('produtos');
             $table->timestamps();
         });

@@ -13,6 +13,7 @@ return new class extends Migration {
             $table->string('endereco');
             $table->string('telefone');
             $table->string('email');
+            $table->foreignId('loja_id')->constrained();
             $table->timestamps();
         });
     }
